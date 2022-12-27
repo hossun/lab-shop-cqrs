@@ -58,6 +58,26 @@ public class MypageViewHandler {
             e.printStackTrace();
         }
     }
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenOrderCancelled_then_UPDATE_2(@Payload OrderCancelled orderCancelled) {
+        try {
+            if (!orderCancelled.validate()) return;
+                // view 객체 조회
+            Optional<Mypage> mypageOptional = mypageRepository.findByOrderId(orderCancelled.getId());
+
+            if( mypageOptional.isPresent()) {
+                 Mypage mypage = mypageOptional.get();
+            // view 객체에 이벤트의 eventDirectValue 를 set 함
+                mypage.setOrderStatus("취소됨");    
+                // view 레파지 토리에 save
+                 mypageRepository.save(mypage);
+                }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 }
