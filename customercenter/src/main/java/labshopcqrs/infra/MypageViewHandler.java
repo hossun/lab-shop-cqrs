@@ -63,7 +63,7 @@ public class MypageViewHandler {
         try {
             if (!orderCancelled.validate()) return;
                 // view 객체 조회
-            Optional<Mypage> mypageOptional = mypageRepository.findByOrderId(orderCancelled.getId());
+            Optional<Mypage> mypageOptional = mypageRepository.findById(orderCancelled.getId());
 
             if( mypageOptional.isPresent()) {
                  Mypage mypage = mypageOptional.get();
@@ -75,7 +75,7 @@ public class MypageViewHandler {
 
 
         }catch (Exception e){
-            e.printStackTrace();
+            e.printStackTrace();ㅗ
         }
     }
 
