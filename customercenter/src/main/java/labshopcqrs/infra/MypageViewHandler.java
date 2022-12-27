@@ -43,7 +43,7 @@ public class MypageViewHandler {
         try {
             if (!deliveryStarted.validate()) return;
                 // view 객체 조회
-            Optional<Mypage> mypageOptional = mypageRepository.findByOrderId(deliveryStarted.getOrderId());
+            Optional<Mypage> mypageOptional = mypageRepository.findById(deliveryStarted.getOrderId());
 
             if( mypageOptional.isPresent()) {
                  Mypage mypage = mypageOptional.get();
